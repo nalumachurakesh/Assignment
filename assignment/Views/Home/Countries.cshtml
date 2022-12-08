@@ -1,0 +1,21 @@
+﻿@using Newtonsoft.Json;
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">
+                Country Name
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var country in ViewBag.Countries.data)
+        {
+            <tr>
+                <td>
+                    @JsonConvert.SerializeObject(country)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

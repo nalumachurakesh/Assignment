@@ -1,0 +1,98 @@
+﻿@model ProfileModel
+@addTagHelper*, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<div>
+    <form asp-controller="Home" asp-action="Profile" method="post">
+        <div class="form-group">
+            <label asp-for="FirstName">First Name:</label>
+            <input asp-for="FirstName" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="LastName">Last Name:</label>
+            <input asp-for="LastName" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="State">State:</label>
+            <select id="ddlState" class="form-control" asp-for="State" asp-items="@Model.States">
+                <option value="">--Select--</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label asp-for="City">City:</label>
+            <select id="ddlCity" class="form-control" asp-for="City" asp-items="@Model.Cities">
+                <option value="">--Select--</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label asp-for="Gender">Gender:</label>
+            <input type="radio" asp-for="Gender" value="Male" /> Male
+            <input type="radio" asp-for="Gender" value="Female"/> Female
+        </div>
+        <div>
+            <p></p>
+            <input type="hidden" id="hdnGuid" name="Guid" asp-for="Guid" />
+            <button type="submit">Submit form</button>
+            <p></p>
+        </div>
+    </form>
+</div>
+<br />
+<div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">
+                    First Name
+                </th>
+                <th scope="col">
+                    Last Name
+                </th>
+                <th scope="col">
+                    City
+                </th>
+                <th scope="col">
+                    State
+                </th>
+                <th scope="col">
+                    Gender
+                </th>
+                <th scope="col">
+                    
+                </th>
+                <th scope="col">
+                    
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var profileModel in (List<ProfileModel>)ViewBag.ProfileModel)
+            {
+                <tr>
+                    <td>
+                        @profileModel.FirstName
+                    </td>
+                    <td>
+                        @profileModel.LastName
+                    </td>
+                    <td>
+                        @profileModel.City
+                    </td>
+                    <td>
+                        @profileModel.State
+                    </td>
+                    <td>
+                        @profileModel.Gender
+                    </td>
+                    <td>
+                        <a asp-action="Profile" asp-route-id="@profileModel.Guid">Edit</a>
+                    </td>
+                    <td>
+                        <a asp-action="ProfileDelete" asp-route-id="@profileModel.Guid" onclick="return confirm('Are you sure you wish to remove this profile?');">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@*</body>
+</html>*@
